@@ -6,18 +6,41 @@ module Plutakhin
 
       # Написать свою функцию my_each
       def my_each
+        for elm in self
+          yield(elm)
+        end
       end
 
       # Написать свою функцию my_map
       def my_map
+        array = MyArray.new
+        for elm in self
+          array << yield(elm)
+        end
+        array
       end
 
       # Написать свою функцию my_compact
       def my_compact
+        array = MyArray.new
+        for elm in self
+          array << elm unless elm.nil?
+        end
+        array
       end
 
       # Написать свою функцию my_reduce
-      def my_reduce
+      def my_reduce(acc = nil)
+        if acc.nil?
+          ignore_first = true
+          acc = first
+        end
+        index = 0
+        each do |elm|
+          acc = yield(acc, elm) unless ignore_first && index == 0
+          index += 1
+        end
+        acc
       end
     end
   end
