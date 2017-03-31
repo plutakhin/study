@@ -6,7 +6,7 @@ module Plutakhin
 
       # Написать свою функцию my_each
       def my_each
-        for elm in self
+        each do |elm|
           yield(elm)
         end
       end
@@ -14,7 +14,7 @@ module Plutakhin
       # Написать свою функцию my_map
       def my_map
         array = MyArray.new
-        for elm in self
+        my_each do |elm|
           array << yield(elm)
         end
         array
@@ -23,7 +23,7 @@ module Plutakhin
       # Написать свою функцию my_compact
       def my_compact
         array = MyArray.new
-        for elm in self
+        my_each do |elm|
           array << elm unless elm.nil?
         end
         array

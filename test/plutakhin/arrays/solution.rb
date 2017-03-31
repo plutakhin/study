@@ -3,7 +3,7 @@ module Plutakhin
     class << self
       def replace(array)
         max = array.max
-        array.map! { |a| a >= 0 ? max : a }
+        array.map { |a| a >= 0 ? max : a }
       end
 
       def search(array, query, from = 0, to = array.length)
@@ -12,11 +12,7 @@ module Plutakhin
         value = array[mid]
         return mid if value == query
 
-        if query < value
-          to = mid
-        else
-          from = mid + 1
-        end
+        query < value ? to = mid : from = mid + 1
         search(array, query, from, to)
       end
     end
